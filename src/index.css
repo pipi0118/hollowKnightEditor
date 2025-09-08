@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #ffffff;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+a {
+  font-weight: 500;
+  color: #4ecdc4;
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ff6b6b;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(78, 205, 196, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(78, 205, 196, 0.8);
+}
+
+/* 选择文本样式 */
+::selection {
+  background: rgba(78, 205, 196, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(78, 205, 196, 0.3);
+  color: #ffffff;
+}

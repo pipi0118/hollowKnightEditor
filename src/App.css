@@ -1,0 +1,487 @@
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 15px 0;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-header p {
+  font-size: 1rem;
+  color: #b8c6db;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.file-section {
+  margin-bottom: 0;
+}
+
+.upload-area {
+  border: 2px dashed #4ecdc4;
+  border-radius: 10px;
+  padding: 30px 15px;
+  text-align: center;
+  background: rgba(78, 205, 196, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-area:hover {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  transform: translateY(-2px);
+}
+
+.upload-area.dragover {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.2);
+  transform: scale(1.02);
+}
+
+.upload-content {
+  pointer-events: none;
+}
+
+.upload-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.upload-area h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #4ecdc4;
+}
+
+.upload-area p {
+  color: #b8c6db;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  pointer-events: auto;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #4ecdc4, #44a08d);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #44a08d, #4ecdc4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+  color: white;
+}
+
+.btn-success:hover {
+  background: linear-gradient(45deg, #a8e6cf, #56ab2f);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4);
+}
+
+.file-info {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.file-info h4 {
+  color: #4ecdc4;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.file-info p {
+  margin-bottom: 5px;
+  color: #e0e6ed;
+  font-size: 0.9rem;
+}
+
+.content-section {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.section-header h3 {
+  color: #4ecdc4;
+  font-size: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.editor-container {
+  margin-bottom: 20px;
+}
+
+.json-editor {
+  width: 100%;
+  height: 500px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(78, 205, 196, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.json-editor:focus {
+  border-color: #4ecdc4;
+  box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+}
+
+/* 搜索选中文本的样式 */
+.json-editor::selection {
+  background-color: rgba(255, 165, 0, 0.6);
+}
+
+.json-editor::-moz-selection {
+  background-color: rgba(255, 165, 0, 0.6);
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 180px 10px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(78, 205, 196, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #4ecdc4;
+  box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+}
+
+.search-input::placeholder {
+  color: #b8c6db;
+}
+
+.search-controls {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.search-controls .search-option-btn {
+  margin-right: 8px;
+}
+
+.search-controls .search-option-btn:last-of-type {
+  margin-right: 12px;
+}
+
+.search-option-btn {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  border-radius: 4px;
+  color: #b8c6db;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 28px;
+  height: 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-option-btn:hover {
+  border-color: #4ecdc4;
+  color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.search-option-btn.active {
+  background: rgba(78, 205, 196, 0.2);
+  border-color: #4ecdc4;
+  color: #4ecdc4;
+  box-shadow: 0 0 6px rgba(78, 205, 196, 0.3);
+}
+
+.search-option-btn:disabled {
+  color: #666;
+  cursor: not-allowed;
+  border-color: rgba(102, 102, 102, 0.3);
+}
+
+.search-btn {
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.4);
+  color: #4ecdc4;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  min-width: 28px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn:hover {
+  background: rgba(78, 205, 196, 0.2);
+  border-color: #4ecdc4;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(78, 205, 196, 0.3);
+}
+
+.search-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.search-btn:disabled {
+  color: #666;
+  cursor: not-allowed;
+  border-color: rgba(102, 102, 102, 0.3);
+  background: rgba(102, 102, 102, 0.1);
+  transform: none;
+  box-shadow: none;
+}
+
+.search-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.search-info {
+  color: #b8c6db;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.editor-with-search {
+  position: relative;
+}
+
+.highlighted {
+  background-color: rgba(255, 235, 59, 0.3) !important;
+  color: #000 !important;
+}
+
+.current-highlight {
+  background-color: rgba(255, 193, 7, 0.6) !important;
+  color: #000 !important;
+}
+
+/* Ant Design Tooltip 自定义样式 */
+.ant-tooltip {
+  z-index: 1050;
+}
+
+.ant-tooltip-inner {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(78, 205, 196, 0.3) !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  max-width: 250px !important;
+}
+
+.ant-tooltip-arrow::before {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid rgba(78, 205, 196, 0.3) !important;
+}
+
+.ant-tooltip-placement-bottom .ant-tooltip-arrow::before {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+  color: #b8c6db;
+}
+
+.error-message, .success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.error-message {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  color: white;
+}
+
+.success-message {
+  background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+  color: white;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+}
+
+.close-btn:hover {
+  opacity: 0.7;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+  }
+  
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .upload-area {
+    padding: 25px 15px;
+  }
+  
+  .upload-icon {
+    font-size: 2rem;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .controls {
+    justify-content: center;
+  }
+  
+  .json-editor {
+    height: 400px;
+    font-size: 12px;
+  }
+  
+  .error-message, .success-message {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 20px;
+    max-width: none;
+  }
+}
