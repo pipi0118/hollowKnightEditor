@@ -5,7 +5,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app-header {
@@ -82,6 +82,10 @@
   font-size: 0.9rem;
 }
 
+.upload-area .tips {
+  color: #ff6b6b;
+}
+
 .btn {
   padding: 12px 24px;
   border: none;
@@ -126,6 +130,30 @@
   background: linear-gradient(45deg, #a8e6cf, #56ab2f);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4);
+}
+
+.btn-warning {
+  background: linear-gradient(45deg, #ff9500, #ffb347);
+  color: white;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(45deg, #ffb347, #ff9500);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 149, 0, 0.4);
+}
+
+.btn-warning:disabled {
+  background: linear-gradient(45deg, #999, #bbb);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-warning:disabled:hover {
+  background: linear-gradient(45deg, #999, #bbb);
+  transform: none;
+  box-shadow: none;
 }
 
 .file-info {
@@ -188,7 +216,7 @@
   border-radius: 8px;
   padding: 15px;
   color: #ffffff;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 13px;
   line-height: 1.4;
   resize: vertical;
@@ -390,7 +418,8 @@
   color: #b8c6db;
 }
 
-.error-message, .success-message {
+.error-message,
+.success-message {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -445,39 +474,40 @@
   .app-container {
     padding: 10px;
   }
-  
+
   .main-content {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .app-header h1 {
     font-size: 1.8rem;
   }
-  
+
   .upload-area {
     padding: 25px 15px;
   }
-  
+
   .upload-icon {
     font-size: 2rem;
   }
-  
+
   .section-header {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .controls {
     justify-content: center;
   }
-  
+
   .json-editor {
     height: 400px;
     font-size: 12px;
   }
-  
-  .error-message, .success-message {
+
+  .error-message,
+  .success-message {
     position: relative;
     top: auto;
     right: auto;

@@ -45,5 +45,5 @@ export const downloadFile = (data: Uint8Array | string, filename: string, mimeTy
  * @returns 是否为支持的文件类型
  */
 export const isValidFileType = (filename: string): boolean => {
-  return filename.endsWith('.dat') || filename.endsWith('.json');
+  return filename.endsWith('.dat')|| filename.endsWith('.bak1') || filename.endsWith('.json');
 };

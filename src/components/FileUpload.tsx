@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import type { FileInfo } from '../utils/fileUtils';
-import { formatFileSize, isValidFileType } from '../utils/fileUtils';
+import React, { useRef } from "react";
+import type { FileInfo } from "../utils/fileUtils";
+import { formatFileSize } from "../utils/fileUtils";
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
@@ -34,8 +34,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 
   return (
     <section className="file-section">
-      <div 
-        className={`upload-area ${isDragOver ? 'dragover' : ''}`}
+      <div
+        className={`upload-area ${isDragOver ? "dragover" : ""}`}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
@@ -44,26 +44,32 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         <div className="upload-content">
           <div className="upload-icon">📁</div>
           <h3>选择存档文件</h3>
+          <h3 className="tips">注：只需要修改一个usr1.dat即可</h3>
           <p>点击或拖拽 .dat 文件到此处</p>
-          <input 
+          <input
             ref={fileInputRef}
-            type="file" 
-            accept=".dat,.json" 
+            type="file"
+            accept=".dat,.json,.bak1"
             onChange={handleFileChange}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
-          <button className="btn btn-primary">
-            选择文件
-          </button>
+          <button className="btn btn-primary">选择文件</button>
         </div>
       </div>
-      
+
       {fileInfo && (
         <div className="file-info">
           <h4>文件信息</h4>
-          <p><strong>文件名:</strong> {fileInfo.name}</p>
-          <p><strong>文件大小:</strong> {formatFileSize(fileInfo.size)}</p>
-          <p><strong>最后修改:</strong> {new Date(fileInfo.lastModified).toLocaleString()}</p>
+          <p>
+            <strong>文件名:</strong> {fileInfo.name}
+          </p>
+          <p>
+            <strong>文件大小:</strong> {formatFileSize(fileInfo.size)}
+          </p>
+          <p>
+            <strong>最后修改:</strong>{" "}
+            {new Date(fileInfo.lastModified).toLocaleString()}
+          </p>
         </div>
       )}
     </section>

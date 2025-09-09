@@ -9,7 +9,7 @@ import * as aes from 'aes-js';
 const HOLLOW_KNIGHT_KEY = 'UKu52ePUBwetZ9wNX88o54dnfKRu0T1l';
 
 /**
- * 移除C#头部信息
+ * 移除C#头部信息（参考网站实现）
  * @param data 原始数据
  * @returns 移除头部后的数据
  */
@@ -26,28 +26,29 @@ const removeHeader = (data: Uint8Array): Uint8Array => {
   }
   
   if (headerFound) {
-    // 跳过头部，然后读取长度前缀
-    let offset = cSharpHeader.length;
+    // 移除固定C#头部和结尾字节[11]
+    let processedData = data.slice(cSharpHeader.length, data.length - 1);
     
-    // 读取字符串长度（7位变长编码）
-    let length = 0;
-    let shift = 0;
+    // 移除长度前缀编码
+    let lengthCount = 0;
+    let offset = 0;
     
-    while (offset < data.length) {
-      const byte = data[offset++];
-      length |= (byte & 0x7F) << shift;
-      shift += 7;
+    // 计算长度前缀的字节数
+    while (offset < processedData.length) {
+      const byte = processedData[offset];
+      lengthCount++;
+      offset++;
       
-      // 如果最高位为0，表示这是最后一个字节
+      // 如果最高位为0，表示这是长度编码的最后一个字节
       if ((byte & 0x80) === 0) {
         break;
       }
     }
     
-    console.log(`Header found, length: ${length}, offset: ${offset}`);
+    console.log(`Header found, length prefix bytes: ${lengthCount}, remaining data length: ${processedData.length - lengthCount}`);
     
-    // 返回实际数据部分（长度为length的数据）
-    return data.slice(offset, offset + length);
+    // 返回去除长度前缀后的实际数据
+    return processedData.slice(lengthCount);
   }
   
   return data;
@@ -174,38 +175,53 @@ export const decryptHollowKnightSave = (data: Uint8Array): string => {
 };
 
 /**
- * 添加C#头部信息
+ * 生成长度前缀字符串编码（参考网站实现）
+ * @param length 长度
+ * @returns 编码后的长度字节数组
+ */
+const generateLengthPrefixedString = (length: number): number[] => {
+  length = Math.min(0x7FFFFFFF, length); // 最大值限制
+  const bytes: number[] = [];
+  
+  for (let i = 0; i < 4; i++) {
+    if (length >> 7 !== 0) {
+      bytes.push((length & 0x7F) | 0x80);
+      length >>= 7;
+    } else {
+      bytes.push(length & 0x7F);
+      length >>= 7;
+      break;
+    }
+  }
+  
+  return bytes;
+};
+
+/**
+ * 添加C#头部信息（参考网站实现）
  * @param data 数据
  * @returns 添加头部后的数据
  */
 const addHeader = (data: Uint8Array): Uint8Array => {
   const cSharpHeader = [0, 1, 0, 0, 0, 255, 255, 255, 255, 1, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 0, 0];
   
-  // 计算长度编码（变长编码）
-  const length = data.length;
-  const lengthBytes: number[] = [];
+  // 生成长度前缀编码
+  const lengthData = generateLengthPrefixedString(data.length);
   
-  let tempLength = length;
-  while (tempLength >= 0x80) {
-    lengthBytes.push((tempLength & 0x7F) | 0x80);
-    tempLength >>>= 7;
-  }
-  lengthBytes.push(tempLength & 0x7F);
+  // 创建新的字节数组：头部 + 长度编码 + 数据 + 结尾字节[11]
+  const result = new Uint8Array(cSharpHeader.length + lengthData.length + data.length + 1);
   
-  // 组合头部 + 长度 + 数据
-  const result = new Uint8Array(cSharpHeader.length + lengthBytes.length + data.length);
-  let offset = 0;
+  // 添加固定头部
+  result.set(cSharpHeader, 0);
   
-  // 添加C#头部
-  result.set(cSharpHeader, offset);
-  offset += cSharpHeader.length;
-  
-  // 添加长度编码
-  result.set(lengthBytes, offset);
-  offset += lengthBytes.length;
+  // 添加长度前缀编码
+  result.set(lengthData, cSharpHeader.length);
   
   // 添加数据
-  result.set(data, offset);
+  result.set(data, cSharpHeader.length + lengthData.length);
+  
+  // 添加固定结尾字节[11]
+  result.set([11], cSharpHeader.length + lengthData.length + data.length);
   
   return result;
 };
@@ -222,7 +238,13 @@ const base64Encode = (data: Uint8Array): Uint8Array => {
   }
   
   const base64String = btoa(binaryString);
-  return new TextEncoder().encode(base64String);
+  let base64Bytes = new TextEncoder().encode(base64String);
+  
+  // 关键修复：过滤掉换行符（10是，13是）
+  // 这是参考网站代码中的关键步骤
+  base64Bytes = base64Bytes.filter(v => v !== 10 && v !== 13);
+  
+  return new Uint8Array(base64Bytes);
 };
 
 /**
